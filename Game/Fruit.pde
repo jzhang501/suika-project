@@ -4,6 +4,7 @@ class Fruit{
   PVector acceleration;
   color c;
   float mass;
+  float radius;
   
   Fruit(float x, float y, float xVel, float yVel){  
       location = new PVector(x, y);
@@ -11,6 +12,7 @@ class Fruit{
       acceleration = new PVector(0, 0);
       c = color(random(255), random(255), random(255));
       mass = random(0.2, 2);
+      radius = 25 * mass;
   }
 
   void move(){
@@ -24,11 +26,11 @@ class Fruit{
   void bounce(){
     float x = location.array()[0];
     float y = location.array()[1];
-    if (x <= 0 || x >= 1000) {
-      velocity.set(velocity.array()[0] * -.5, velocity.array()[1] * .5);
+    if (x <= radius || x >= 1000 - radius) {
+      velocity.set(velocity.array()[0] * -.25, velocity.array()[1] * .25);
     }
-    if (y <= 0 || y >= 800) {
-      velocity.set(velocity.array()[0] * .5 , velocity.array()[1] * -.5);
+    if (y <= radius || y >= 800 - radius) {
+      velocity.set(velocity.array()[0] * .25 , velocity.array()[1] * -.25);
     }
   }
   
@@ -40,6 +42,6 @@ class Fruit{
   void display(){
     stroke(1);
     fill(c);
-    ellipse(location.x, location.y, 50 * mass, 50 * mass);
+    circle(location.x, location.y, radius*2);
   }
 }
