@@ -27,10 +27,11 @@ class Fruit{
     float x = location.array()[0];
     float y = location.array()[1];
     if (x <= radius || x >= 1000 - radius) {
-      velocity.set(velocity.array()[0] * -.25, velocity.array()[1] * .25);
+      velocity.set(velocity.array()[0] * -.3, velocity.array()[1] * .3);
     }
-    if (y <= radius || y >= 800 - radius) {
-      velocity.set(velocity.array()[0] * .25 , velocity.array()[1] * -.25);
+    if (y >= 800 - radius) {
+      velocity.set(velocity.array()[0] * .3 , velocity.array()[1] * -.3);
+      location.set(x, 800-radius);
     }
   }
   
