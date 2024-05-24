@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Fruit{
   PVector location;
   PVector velocity;
@@ -32,6 +34,26 @@ class Fruit{
     if (y >= 800 - radius) {
       velocity.set(velocity.array()[0] * .3 , velocity.array()[1] * -.3);
       location.set(x, 800-radius);
+    }
+  }
+  
+  void collide(Fruit other) {
+    if (this.location.dist(other.location) < this.radius + other.radius) {
+      PVector finalVel1 = new PVector(1,0);
+      PVector finalVel2 = new PVector(1,0);
+      float mag1 = 2 * this.mass / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
+      finalVel1.setMag(mag1);
+      float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
+      finalVel2.setMag(mag2);
+      float heading = this.location.sub(other.location).heading();
+      System.out.println(heading / 3.14 * 180);
+      finalVel1.rotate(heading);
+      finalVel2.rotate(heading);
+      
+      this.velocity = finalVel1;
+      System.out.println(Arrays.toString(this.velocity.array()));
+      other.velocity = finalVel2;
+      System.out.println(Arrays.toString(other.velocity.array()));
     }
   }
   

@@ -25,6 +25,11 @@ void draw() {
     f.move();
     f.bounce();
     f.display();
+    for (Fruit g: fruitList) {
+      if (!f.equals(g)) {
+        f.collide(g);
+      }
+    }
   }
   fill(0);
 }
