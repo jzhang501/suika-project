@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.lang.Math;
 
 class Fruit{
   PVector location;
@@ -14,7 +14,7 @@ class Fruit{
       acceleration = new PVector(0, 0);
       c = color(random(255), random(255), random(255));
       mass = random(0.2, 2);
-      radius = 25 * mass;
+      radius = (float) (40 * Math.sqrt(mass));
   }
 
   void move(){
@@ -28,8 +28,12 @@ class Fruit{
   void bounce(){
     float x = location.array()[0];
     float y = location.array()[1];
-    if (x <= radius || x >= 1000 - radius) {
+    if (x <= radius) {
       velocity.set(velocity.array()[0] * -.3, velocity.array()[1] * .3);
+      location.set(radius, y);
+    } else if (x >= 1000 - radius) {
+      velocity.set(velocity.array()[0] * -.3, velocity.array()[1] * .3);
+      location.set(1000-radius, y);
     }
     if (y >= 800 - radius) {
       velocity.set(velocity.array()[0] * .3 , velocity.array()[1] * -.3);
@@ -41,19 +45,16 @@ class Fruit{
     if (this.location.dist(other.location) < this.radius + other.radius) {
       PVector finalVel1 = new PVector(1,0);
       PVector finalVel2 = new PVector(1,0);
-      float mag1 = 2 * this.mass / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
+      float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
       finalVel1.setMag(mag1);
       float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
       finalVel2.setMag(mag2);
-      float heading = this.location.sub(other.location).heading();
-      System.out.println(heading / 3.14 * 180);
+      float heading = this.location.copy().sub(other.location).heading();
       finalVel1.rotate(heading);
-      finalVel2.rotate(heading);
+      finalVel2.rotate(heading+3.1415);
       
       this.velocity = finalVel1;
-      System.out.println(Arrays.toString(this.velocity.array()));
       other.velocity = finalVel2;
-      System.out.println(Arrays.toString(other.velocity.array()));
     }
   }
   

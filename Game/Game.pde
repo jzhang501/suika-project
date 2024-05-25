@@ -24,12 +24,12 @@ void draw() {
     f.applyForce(gravity);
     f.move();
     f.bounce();
-    f.display();
     for (Fruit g: fruitList) {
       if (!f.equals(g)) {
         f.collide(g);
       }
     }
+    f.display();
   }
   fill(0);
 }
