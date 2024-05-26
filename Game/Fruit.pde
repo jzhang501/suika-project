@@ -43,12 +43,19 @@ class Fruit{
   
   void collide(Fruit other) {
     if (this.location.dist(other.location) < this.radius + other.radius) {
+      PVector difference = this.location.copy().sub(other.location);
+      while (this.location.dist(other.location) <= this.radius + other.radius) {
+        PVector shift = difference.copy().normalize();
+        this.location.add(shift);
+        other.location.sub(shift);
+      }
+      
       PVector finalVel1 = new PVector(1,0);
       PVector finalVel2 = new PVector(1,0);
       float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
-      finalVel1.setMag(mag1);
+      finalVel1.setMag(mag1*.3);
       float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
-      finalVel2.setMag(mag2);
+      finalVel2.setMag(mag2*.3);
       float heading = this.location.copy().sub(other.location).heading();
       finalVel1.rotate(heading);
       finalVel2.rotate(heading+3.1415);
