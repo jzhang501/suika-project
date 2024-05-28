@@ -11,9 +11,19 @@ class Fruit{
   
 // 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 orange, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
   color[] colors = new color[] {color(209, 35, 4), color(255, 71, 71), color(120, 48, 252), color(250, 172, 70), color(245, 105, 12), color(227, 16, 16), color(252, 246, 124), color(255, 173, 217), color(255, 245, 102), color(196, 255, 150), color(78, 204, 105)};
-  Fruit(float x, float y, float xVel, float yVel){  
+  Fruit(float x, float y){  
       location = new PVector(x, y);
-      velocity = new PVector(xVel, yVel);
+      velocity = new PVector(0, 0);
+      acceleration = new PVector(0, 0);
+      type = (int) (Math.random()*11);
+      c = colors[type];
+      mass = type;
+      radius = (float) 10 * mass;
+  }
+  
+  Fruit(float x, float y, int type){  
+      location = new PVector(x, y);
+      velocity = new PVector(0, 0);
       acceleration = new PVector(0, 0);
       type = (int) (Math.random()*11);
       c = colors[type];
@@ -46,27 +56,34 @@ class Fruit{
   }
   
   void collide(Fruit other) {
-    if (this.location.dist(other.location) < this.radius + other.radius) {
-      PVector difference = this.location.copy().sub(other.location);
-      while (this.location.dist(other.location) <= this.radius + other.radius) {
-        PVector shift = difference.copy().normalize();
-        this.location.add(shift);
-        other.location.sub(shift);
-      }
-      
-      PVector finalVel1 = new PVector(1,0);
-      PVector finalVel2 = new PVector(1,0);
-      float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
-      finalVel1.setMag(mag1*.3);
-      float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
-      finalVel2.setMag(mag2*.3);
-      float heading = this.location.copy().sub(other.location).heading();
-      finalVel1.rotate(heading);
-      finalVel2.rotate(heading+3.1415);
-      
-      this.velocity = finalVel1;
-      other.velocity = finalVel2;
+    PVector difference = this.location.copy().sub(other.location);
+    while (this.location.dist(other.location) <= this.radius + other.radius) {
+      PVector shift = difference.copy().normalize();
+      this.location.add(shift);
+      other.location.sub(shift);
     }
+    
+    PVector finalVel1 = new PVector(1,0);
+    PVector finalVel2 = new PVector(1,0);
+    float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
+    finalVel1.setMag(mag1*.3);
+    float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
+    finalVel2.setMag(mag2*.3);
+    float heading = this.location.copy().sub(other.location).heading();
+    finalVel1.rotate(heading);
+    finalVel2.rotate(heading+3.1415);
+    
+    this.velocity = finalVel1;
+    other.velocity = finalVel2;
+  }
+  
+  void merge(Fruit other) {
+      PVector newLoc = this.location.copy().sub(other.location);
+      newLoc.div(2);
+      newLoc.add(this.location);
+      fruitList.add(new Fruit(newLoc.array()[0], newLoc.array()[1], this.type+1));
+      fruitList.remove(this);
+      fruitList.remove(other);
   }
   
   void applyForce(PVector force) {
