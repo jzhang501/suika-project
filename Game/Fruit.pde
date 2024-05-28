@@ -7,14 +7,18 @@ class Fruit{
   color c;
   float mass;
   float radius;
+  int type;
   
+// 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 orange, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
+  color[] colors = new color[] {color(209, 35, 4), color(255, 71, 71), color(120, 48, 252), color(250, 172, 70), color(245, 105, 12), color(227, 16, 16), color(252, 246, 124), color(255, 173, 217), color(255, 245, 102), color(196, 255, 150), color(78, 204, 105)};
   Fruit(float x, float y, float xVel, float yVel){  
       location = new PVector(x, y);
       velocity = new PVector(xVel, yVel);
       acceleration = new PVector(0, 0);
-      c = color(random(255), random(255), random(255));
-      mass = random(0.2, 2);
-      radius = (float) (40 * Math.sqrt(mass));
+      type = (int) (Math.random()*11);
+      c = colors[type];
+      mass = type;
+      radius = (float) 10 * mass;
   }
 
   void move(){
