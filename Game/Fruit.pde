@@ -1,6 +1,7 @@
 import java.lang.Math;
 
 class Fruit{
+  float[] sizes = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -13,7 +14,8 @@ class Fruit{
       velocity = new PVector(xVel, yVel);
       acceleration = new PVector(0, 0);
       c = color(random(255), random(255), random(255));
-      mass = random(0.2, 2);
+      // mass = random(0.2, 2);
+      mass = (float) ((int) random(sizes));
       radius = (float) (40 * Math.sqrt(mass));
   }
 
@@ -70,9 +72,14 @@ class Fruit{
     acceleration.add(netAcc);
   }
   
+  void blinking() {
+    circle(location.x, location.y, radius*2);
+    circle(location.x + 15 * mass, location.y - 4 * mass, radius/2);
+    circle(location.x - 15 * mass, location.y - 4 * mass, radius/2);
+  }
   void display(){
     stroke(1);
     fill(c);
-    circle(location.x, location.y, radius*2);
+    blinking();
   }
 }
