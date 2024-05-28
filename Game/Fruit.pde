@@ -21,11 +21,11 @@ class Fruit{
       radius = (float) 10 * mass;
   }
   
-  Fruit(float x, float y, int type){  
+  Fruit(float x, float y, int typeI){  
       location = new PVector(x, y);
       velocity = new PVector(0, 0);
       acceleration = new PVector(0, 0);
-      type = (int) (Math.random()*11);
+      type = typeI;
       c = colors[type];
       mass = type;
       radius = (float) 10 * mass;
@@ -81,7 +81,9 @@ class Fruit{
       PVector newLoc = this.location.copy().sub(other.location);
       newLoc.div(2);
       newLoc.add(this.location);
-      fruitList.add(new Fruit(newLoc.array()[0], newLoc.array()[1], this.type+1));
+      if (this.type < 10) {
+        fruitList.add(new Fruit(newLoc.array()[0], newLoc.array()[1], this.type+1));
+      }
       fruitList.remove(this);
       fruitList.remove(other);
   }
