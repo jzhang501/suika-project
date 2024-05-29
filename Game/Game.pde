@@ -2,7 +2,7 @@ ArrayList<Fruit> fruitList;
 
 
 void setup() {
-  size(1000, 800);
+  size(800,1000);
   fruitList = new ArrayList<Fruit>();
 }
 
