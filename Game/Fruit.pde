@@ -94,14 +94,14 @@ class Fruit{
   }
   
   void merge(Fruit other) {
-      PVector newLoc = this.location.copy().sub(other.location);
-      newLoc.div(2);
-      newLoc.add(this.location);
-      if (this.type < 10) {
-        fruitList.add(new Fruit(newLoc.array()[0], newLoc.array()[1], this.type+1));
-      }
-      fruitList.remove(this);
-      fruitList.remove(other);
+    float newX = (this.location.x + other.location.x) / 2;
+    float newY = (this.location.y + other.location.y) / 2;
+    PVector newLoc = new PVector(newX, newY);
+    if (this.type < 10) {
+      fruitList.add(new Fruit(newLoc.array()[0], newLoc.array()[1], this.type+1));
+    }
+    fruitList.remove(this);
+    fruitList.remove(other);
   }
   
   void applyForce(PVector force) {
