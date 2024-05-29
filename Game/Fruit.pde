@@ -1,7 +1,10 @@
 import java.lang.Math;
 
 class Fruit{
-  float[] sizes = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+  float[] sizes = {0.3, 0.5, 0.7, 1, 1.5};
+  int timeBetweenBlink = 1000;
+  int blinkTime = 0;
+  boolean eyesOpen = true;
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -15,7 +18,7 @@ class Fruit{
       acceleration = new PVector(0, 0);
       c = color(random(255), random(255), random(255));
       // mass = random(0.2, 2);
-      mass = (float) ((int) random(sizes));
+      mass = sizes[(int) random(5.0)];
       radius = (float) (40 * Math.sqrt(mass));
   }
 
@@ -73,10 +76,31 @@ class Fruit{
   }
   
   void blinking() {
-    circle(location.x, location.y, radius*2);
-    circle(location.x + 15 * mass, location.y - 4 * mass, radius/2);
-    circle(location.x - 15 * mass, location.y - 4 * mass, radius/2);
-  }
+    int time = millis();
+    if (time - blinkTime >= timeBetweenBlink) {
+      eyesOpen = !eyesOpen;
+      blinkTime = time;
+    }
+    // big fruit
+    circle(location.x, location.y, radius * 2);
+    float eyeOffsetX = radius * 0.5;  
+    float eyeOffsetY = radius * 0.2;
+    // eyes
+    if (eyesOpen) {
+      fill(0);
+      circle(location.x - eyeOffsetX, location.y - eyeOffsetY, radius / 2);
+      fill(0);
+      circle(location.x + eyeOffsetX, location.y - eyeOffsetY, radius / 2);
+    } else {
+        line(location.x + eyeOffsetX + radius/4, location.y - eyeOffsetY, location.x + radius/4, location.y - eyeOffsetY);
+        line(location.x - eyeOffsetX - radius/4, location.y - eyeOffsetY, location.x - radius/4, location.y - eyeOffsetY);
+    }
+    // mouth 
+    float mouthOffsetX = radius * 0.5;
+    float mouthOffsetY = radius * 0.5;
+    line(location.x + mouthOffsetX , location.y + mouthOffsetY, location.x - mouthOffsetX, location.y + mouthOffsetY);
+}
+
   void display(){
     stroke(1);
     fill(c);
