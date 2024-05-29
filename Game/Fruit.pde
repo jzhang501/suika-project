@@ -79,7 +79,11 @@ class Fruit{
     }
   }
   
-  void merge(Fruit other){
+  boolean merge(Fruit other){
+    if (this.location.dist(other.location) < this.radius + other.radius) {
+      return true;
+    }
+    else return false;
   }
 
   void applyForce(PVector force){

@@ -20,7 +20,7 @@ void mousePressed() {
 void draw() {
   background(196,164,132);
   fill(255,255,224);
-  // The x of box is bounmded 150 to 650 on outer and 160 to 640 on inner
+  // The x of box is bounded 150 to 650 on outer and 160 to 640 on inner
   // The y on top is 150 and ends at 950 inner or 960 outer at the bottom
   rect(150,150,10,800);
   rect(640,150,10,800);
@@ -32,11 +32,21 @@ void draw() {
     fruitList.get(i).bounce();
     for (int j = 0; j < fruitList.size(); j++){
             if (!fruitList.get(i).equals(fruitList.get(j))) {
+              if (fruitList.get(i).type == fruitList.get(j).type && fruitList.get(i).merge(fruitList.get(j))){
+                fruitList.add(new Fruit(fruitList.get(i).location.x,fruitList.get(i).location.y,0,0,fruitList.get(i).type+1));
+                fruitList.remove(fruitList.get(i));
+                fruitList.remove(fruitList.get(j));
+                i--;
+                j--;
+              }
+              else{
               fruitList.get(i).collide(fruitList.get(j));
+              }
         }
     }
-    fruitList.get(i).display();
   }
-
+  for (int k = 0; k < fruitList.size(); k++){
+        fruitList.get(k).display();
+  }
   fill(0);
 }
