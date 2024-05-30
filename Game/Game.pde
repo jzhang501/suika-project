@@ -31,7 +31,7 @@ void draw() {
     f.applyForce(gravity);
     f.move();
     f.bounce();
-    for (int j = 0; j < fruitList.size(); j++) {
+    for (int j = i; j < fruitList.size(); j++) {
       Fruit g = fruitList.get(j);
       if (!f.equals(g)) {
         if (f.location.dist(g.location) < f.radius + g.radius) {
