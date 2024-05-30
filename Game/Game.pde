@@ -46,5 +46,6 @@ void draw() {
     }
   }
   displayFruit = new Fruit(mouseX, 160, type);
+  displayFruit.bounce();
   displayFruit.display();
 }
