@@ -135,17 +135,18 @@ class Fruit{
         line(location.x + eyeOffsetX + radius/4, location.y - eyeOffsetY, location.x + radius/4, location.y - eyeOffsetY);
         line(location.x - eyeOffsetX - radius/4, location.y - eyeOffsetY, location.x - radius/4, location.y - eyeOffsetY);
     }
-    // mouth 
-    float mouthOffsetX = radius * 0.5;
-    float mouthOffsetY = radius * 0.5;
-    //line(location.x + mouthOffsetX , location.y + mouthOffsetY, location.x - mouthOffsetX, location.y + mouthOffsetY);
-    arc(location.x, location.y + 3 * mass, radius/3, radius/3, 0, PI+QUARTER_PI, OPEN);
 }
+
+  void mouth(){
+    fill(0);
+    arc(location.x, location.y + 3 * mass, radius/3, radius/3, 0, PI, CLOSE);
+  }
 
   void display(){
     stroke(1);
     fill(c);
     blinking();
+    mouth();
     //circle(location.x, location.y, radius*2);
     //fill(0);
     //circle(location.x + 3 * mass, location.y - .3 * mass, radius/3);
