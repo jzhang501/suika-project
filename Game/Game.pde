@@ -1,17 +1,19 @@
 ArrayList<Fruit> fruitList;
+Fruit displayFruit; // the one that doesn't fall and shows you what will drop next
+int type;
 
 void setup() {
   size(800,1000);
   background(196,164,132);
   fruitList = new ArrayList<Fruit>();
+  type = (int) (Math.random() * 5);
 }
 
 void mousePressed() {
   if (mouseButton == LEFT) {
-    float x = mouseX;
-    float y = 150;
-    int type = (int) (Math.random()*5);
-    fruitList.add(new Fruit(x, y, type));
+    fruitList.add(displayFruit);
+    type = (int) (Math.random() * 5);
+    displayFruit = new Fruit(mouseX, 150, type);
   }
 }
 
@@ -35,7 +37,6 @@ void draw() {
         if (f.location.dist(g.location) < f.radius + g.radius) {
           if (f.type==g.type) {
             f.merge(g);
-            break;
           } else {
             f.collide(g);
           }
@@ -44,4 +45,6 @@ void draw() {
       f.display();
     }
   }
+  displayFruit = new Fruit(mouseX, 160, type);
+  displayFruit.display();
 }

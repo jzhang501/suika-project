@@ -34,7 +34,7 @@ class Fruit{
       acceleration = new PVector(0, 0);
       type = (int) (Math.random()*11);
       c = colors[type];
-      mass = type;
+      mass = type+1;
       radius = (float) 10 * mass;
   }
 
@@ -44,7 +44,7 @@ class Fruit{
       acceleration = new PVector(0, 0);
       type = typeI;
       c = colors[type];
-      mass = type;
+      mass = type+1;
       radius = (float) 10 * mass;
   }
 
@@ -82,14 +82,8 @@ class Fruit{
     PVector finalVel1 = new PVector(1,0);
     PVector finalVel2 = new PVector(1,0);
     float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
-    if (mag1 * .3 < 1) {
-      mag1 = 0;
-    }
     finalVel1.setMag(mag1*.3);
     float mag2 = (this.mass - other.mass) / (this.mass + other.mass) * this.velocity.mag() + (2 * other.mass) / (this.mass + other.mass) * other.velocity.mag();
-    if (mag2 * .3 < 1) {
-      mag2 = 0;
-    }
     finalVel2.setMag(mag2*.3);
     float heading = this.location.copy().sub(other.location).heading();
     finalVel1.rotate(heading);
