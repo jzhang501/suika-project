@@ -12,8 +12,9 @@ class Fruit{
   float mass;
   float radius;
   int type;
+  float rotation; // in radians
   
-// 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 orange, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
+// 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 persimmon, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
   color[] colors = new color[] {
     color(209, 35, 4),
     color(255, 71, 71),
@@ -27,6 +28,11 @@ class Fruit{
     color(196, 255, 150),
     color(78, 204, 105)
   };
+  
+  PShape[] fruitImages = new PShape[] {loadShape("cherry.svg"), loadShape("strawberry.svg"), 
+    loadShape("grapes.svg"), loadShape("dekopon.svg"), loadShape("persimmon.svg"), 
+    loadShape("apple.svg"), loadShape("pear.svg"), loadShape("peach.svg"), 
+    loadShape("pineapple.svg"), loadShape("melon.svg"), loadShape("watermelon.svg")};
 
   Fruit(float x, float y){  
       location = new PVector(x, y);
@@ -65,9 +71,9 @@ class Fruit{
       velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(640-radius, y);
     }
-    if (y > 950-radius){
+    if (y > 500-radius){
       velocity.set(velocity.x * .3 , velocity.y * -.3);
-      location.set(x, 950-radius);
+      location.set(x, 500-radius);
     }
   }
   
@@ -116,31 +122,36 @@ class Fruit{
       blinkTime = time;
     }
     // big fruit
-    circle(location.x, location.y, radius * 2);
+    translate(location.x, location.y);
+    rotate(rotation);
+    shape(fruitImages[type], -1.3*radius, -1.3*radius, radius * 2.6, radius * 2.6);
+    // eyes
     float eyeOffsetX = radius * 0.5;  
     float eyeOffsetY = radius * 0.2;
-    // eyes
     if (eyesOpen) {
       fill(0);
-      circle(location.x - eyeOffsetX, location.y - eyeOffsetY, radius / 2);
+      circle(- eyeOffsetX, - eyeOffsetY, radius / 2);      
       fill(0);
-      circle(location.x + eyeOffsetX, location.y - eyeOffsetY, radius / 2);
+      circle(eyeOffsetX, - eyeOffsetY, radius / 2);
     } else {
-        line(location.x + eyeOffsetX + radius/4, location.y - eyeOffsetY, location.x + radius/4, location.y - eyeOffsetY);
-        line(location.x - eyeOffsetX - radius/4, location.y - eyeOffsetY, location.x - radius/4, location.y - eyeOffsetY);
+      line(eyeOffsetX + radius/4, - eyeOffsetY, radius/4, - eyeOffsetY);
+      line(- eyeOffsetX - radius/4, - eyeOffsetY, - radius/4, - eyeOffsetY);
     }
-}
+  }
 
   void mouth(){
     fill(0);
-    arc(location.x, location.y + 3 * mass, radius/3, radius/3, 0, PI, CLOSE);
+    arc(0, 3 * mass, radius/3, radius/3, 0, PI, CLOSE);
   }
 
   void display(){
     stroke(1);
     fill(c);
+    
     blinking();
     mouth();
+    rotate(-rotation);
+    translate(-location.x, -location.y);
     //circle(location.x, location.y, radius*2);
     //fill(0);
     //circle(location.x + 3 * mass, location.y - .3 * mass, radius/3);
