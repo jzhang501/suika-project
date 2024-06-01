@@ -58,21 +58,22 @@ class Fruit{
    location.add(velocity);
    velocity.add(acceleration);
    acceleration = new PVector(0, 0);
-   velocity.limit(10);
+   //velocity.limit(10);
+   rotation += velocity.x/radius;
   }
 
   void bounce(){
     float x = location.x;
     float y = location.y;
     if (x < radius+160){
-      velocity.set(velocity.x * -.3, velocity.y * .3);
+      velocity.set(velocity.x * -.5, velocity.y * .5);
       location.set(radius+160, y);
     } else if (x > 640-radius){
-      velocity.set(velocity.x * -.3, velocity.y * .3);
+      velocity.set(velocity.x * -.5, velocity.y * .5);
       location.set(640-radius, y);
     }
     if (y > 500-radius){
-      velocity.set(velocity.x * .3 , velocity.y * -.3);
+      velocity.set(velocity.x * .5 , velocity.y * -.5);
       location.set(x, 500-radius);
     }
   }
