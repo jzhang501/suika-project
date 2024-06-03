@@ -1,7 +1,6 @@
 import java.lang.Math;
 
 class Fruit{
-  float[] sizes = {0.3, 0.5, 0.7, 1, 1.5};
   int timeBetweenBlink = 1000;
   int blinkTime = 0;
   boolean eyesOpen = true;
@@ -14,21 +13,6 @@ class Fruit{
   int type;
   float rotation; // in radians
   
-// 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 persimmon, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
-  color[] colors = new color[] {
-    color(209, 35, 4),
-    color(255, 71, 71),
-    color(120, 48, 252),
-    color(250, 172, 70),
-    color(245, 105, 12),
-    color(227, 16, 16),
-    color(252, 246, 124),
-    color(255, 173, 217),
-    color(255, 245, 102),
-    color(196, 255, 150),
-    color(78, 204, 105)
-  };
-  
   PShape[] fruitImages = new PShape[] {loadShape("cherry.svg"), loadShape("strawberry.svg"), 
     loadShape("grapes.svg"), loadShape("dekopon.svg"), loadShape("persimmon.svg"), 
     loadShape("apple.svg"), loadShape("pear.svg"), loadShape("peach.svg"), 
@@ -39,7 +23,6 @@ class Fruit{
       velocity = new PVector(0, 0);
       acceleration = new PVector(0, 0);
       type = (int) (Math.random()*11);
-      c = colors[type];
       mass = type+1;
       radius = (float) 10 * mass;
   }
@@ -49,7 +32,6 @@ class Fruit{
       velocity = new PVector(0, 0);
       acceleration = new PVector(0, 0);
       type = typeI;
-      c = colors[type];
       mass = type+1;
       radius = (float) 10 * mass;
   }
@@ -66,14 +48,14 @@ class Fruit{
     float x = location.x;
     float y = location.y;
     if (x < radius+160){
-      velocity.set(velocity.x * -.5, velocity.y * .5);
+      velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(radius+160, y);
     } else if (x > 640-radius){
-      velocity.set(velocity.x * -.5, velocity.y * .5);
+      velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(640-radius, y);
     }
     if (y > 950-radius){
-      velocity.set(velocity.x * .5 , velocity.y * -.5);
+      velocity.set(velocity.x * .3 , velocity.y * -.3);
       location.set(x, 950-radius);
     }
   }
