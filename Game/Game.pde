@@ -26,7 +26,7 @@ void draw() {
   if (startPage){
     fill(204, 85, 0);
     textFont(f,100);
-    text("Suika Game!!!",20,150);
+    text("Cat Game!!!",20,150);
     Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30,color(255,255,255));
     ArrayList<Fruit> startDisplay = new ArrayList<Fruit>();
     if (!displayed){

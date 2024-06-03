@@ -29,6 +29,8 @@ class Fruit{
     color(78, 204, 105)
   };
   
+  PImage cat = loadImage("jpeg.png");
+  
   PShape[] fruitImages = new PShape[] {loadShape("cherry.svg"), loadShape("strawberry.svg"), 
     loadShape("grapes.svg"), loadShape("dekopon.svg"), loadShape("persimmon.svg"), 
     loadShape("apple.svg"), loadShape("pear.svg"), loadShape("peach.svg"), 
@@ -123,13 +125,13 @@ class Fruit{
     // big fruit
     translate(location.x, location.y);
     rotate(rotation);
-    shape(fruitImages[type], -1.3*radius, -1.3*radius, radius * 2.6, radius * 2.6);
+    image(cat, -1.3*radius, -1.3*radius, radius * 2.6, radius * 2.6);
     // eyes
     float eyeOffsetX = radius * 0.5;  
     float eyeOffsetY = radius * 0.2;
     if (eyesOpen) {
       fill(0);
-      circle(- eyeOffsetX, - eyeOffsetY, radius / 2);      
+      circle(- eyeOffsetX +.16*radius, - eyeOffsetY, radius / 2);      
       fill(0);
       circle(eyeOffsetX, - eyeOffsetY, radius / 2);
     } else {
