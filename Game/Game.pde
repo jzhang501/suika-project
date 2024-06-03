@@ -27,7 +27,7 @@ void draw() {
     fill(204, 85, 0);
     textFont(f,100);
     text("Suika Game!!!",20,150);
-    Button play = new Button(200,600,loadShape("watermelon.svg"),400,"Press to Play",20,color(100,100,100));
+    Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30,color(255,255,255));
     ArrayList<Fruit> startDisplay = new ArrayList<Fruit>();
     if (!displayed){
       displayed = true;
@@ -43,24 +43,53 @@ void draw() {
     for (int i = 0; i < startDisplay.size(); i++) {
       startDisplay.get(i).display();
     }
-    play.display();
-    play.click();
-    if (play.clicked){
+    modeSwitch.display();
+    modeSwitch.click();
+    if (modeSwitch.clicked){
       startPage = false;
       displayed = false;
-      regularMode = true;
+      modePage = true;
     }
   }
   if (modePage){
-    
+      if (time > 30){
+        background(196,164,132);
+        Button regularModeSwitch = new Button(200,-50,loadShape("watermelon.svg"),400,200,150,"Press to Select Regular Mode",30,color(255,255,255));
+        regularModeSwitch.display();
+        regularModeSwitch.click();
+        if (regularModeSwitch.clicked){
+          modePage = false;
+          regularMode = true;
+          time = 0;
+         }
+        Button timerModeSwitch = new Button(200,300,loadShape("watermelon.svg"),400,200,500,"Press to Select Timer Mode",30,color(255,255,255));
+        timerModeSwitch.display();
+        timerModeSwitch.click();
+        if (timerModeSwitch.clicked){
+          modePage = false;
+          timerMode = true;
+          regularMode = true;
+          time = 0;
+        }
+        Button smallModeSwitch = new Button(200,650,loadShape("watermelon.svg"),400,200,850,"Press to Select Small Mode",30,color(255,255,255));
+        smallModeSwitch.display();
+        smallModeSwitch.click();
+        if (smallModeSwitch.clicked){
+          modePage = false;
+          smallMode = true;
+          regularMode = true;
+          time = 0;
+        }
+      }
+      time++;
   }
   if (winPage){
     textFont(f,100);
-    text("You Win Kinda",100,150);
+    text("You Kinda Win",100,150);
   }
   if (losePage){
     textFont(f,100);
-    text("You Lose",100,150);
+    text("You Kinda Lose",100,150);
   }
   if (regularMode){
     if (mousePressed && mouseButton == LEFT && time >= 25) {

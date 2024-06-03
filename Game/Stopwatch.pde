@@ -1,9 +1,9 @@
 import java.lang.Math;
 
-class Scoreboard{
+class Stopwatch{
   int score = 0;
   
-  Scoreboard(){
+  Stopwatch(){
     
   }
   
@@ -15,3 +15,4 @@ class Scoreboard{
     
   }
 }
+  

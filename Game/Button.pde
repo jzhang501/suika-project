@@ -1,32 +1,39 @@
 class Button{
   
-  PVector location;
+  PVector shapeLocation;
   PShape shape;
   int size;
+  PVector textLocation;
   String text;
-  int fontSize;
+  int textSize;
   color c;
-  boolean clicked;
   PFont f;
+  boolean clicked;
   
-  Button(int x, int y, PShape shape, int size, String text, int fontSize, color c){
-    this.location = new PVector(x,y);
+  Button(int xl, int yl, PShape shape, int size, int xt, int yt, String text, int textSize, color c){
+    this.shapeLocation = new PVector(xl,yl);
     this.shape = shape;
-    this.text = text;
     this.size = size;
+    this.textLocation = new PVector(xt,yt);
+    this.text = text;
+    this.textSize = textSize;
     this.c = c;
+    f = createFont("Arial",textSize,true);
   }
   
   void click(){
     if (mousePressed == true && mouseButton == LEFT){
+      if ( mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + size && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + size){
       clicked = true;
+      }
     }
   }
   
   void display(){
     fill(c);
-    shape(shape, location.x, location.y, size, size);
-    f = createFont("Monospaced",100,true);
+    shape(shape, shapeLocation.x, shapeLocation.y, size, size);
+    textFont(f,textSize);
+    text(text,textLocation.x, textLocation.y);
   }
   
 }
