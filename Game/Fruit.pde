@@ -66,14 +66,14 @@ class Fruit{
     float x = location.x;
     float y = location.y;
     if (x < radius+160){
-      velocity.set(velocity.x * -.5, velocity.y * .5);
+      velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(radius+160, y);
     } else if (x > 640-radius){
-      velocity.set(velocity.x * -.5, velocity.y * .5);
+      velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(640-radius, y);
     }
     if (y > 950-radius){
-      velocity.set(velocity.x * .5 , velocity.y * -.5);
+      velocity.set(velocity.x * .3 , velocity.y * -.3);
       location.set(x, 950-radius);
     }
   }
