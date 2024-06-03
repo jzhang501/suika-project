@@ -72,9 +72,9 @@ class Fruit{
       velocity.set(velocity.x * -.5, velocity.y * .5);
       location.set(640-radius, y);
     }
-    if (y > 500-radius){
+    if (y > 950-radius){
       velocity.set(velocity.x * .5 , velocity.y * -.5);
-      location.set(x, 500-radius);
+      location.set(x, 950-radius);
     }
   }
   
@@ -85,7 +85,6 @@ class Fruit{
       this.location.add(shift);
       other.location.sub(shift);
     }
-    
     PVector finalVel1 = new PVector(1,0);
     PVector finalVel2 = new PVector(1,0);
     float mag1 = (2 * this.mass) / (this.mass + other.mass) * this.velocity.mag() - (this.mass - other.mass) / (this.mass + other.mass) * other.velocity.mag();
@@ -95,7 +94,6 @@ class Fruit{
     float heading = this.location.copy().sub(other.location).heading();
     finalVel1.rotate(heading);
     finalVel2.rotate(heading+3.1415);
-    
     this.velocity = finalVel1;
     other.velocity = finalVel2;
   }
@@ -148,7 +146,6 @@ class Fruit{
   void display(){
     stroke(1);
     fill(c);
-    
     blinking();
     mouth();
     rotate(-rotation);
