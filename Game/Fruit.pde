@@ -7,7 +7,6 @@ class Fruit{
   PVector location;
   PVector velocity;
   PVector acceleration;
-  color c;
   float mass;
   float radius;
   int type;
@@ -103,8 +102,6 @@ class Fruit{
       blinkTime = time;
     }
     // big fruit
-    translate(location.x, location.y);
-    rotate(rotation);
     shape(fruitImages[type], -1.3*radius, -1.3*radius, radius * 2.6, radius * 2.6);
     // eyes
     float eyeOffsetX = radius * 0.5;  
@@ -126,13 +123,32 @@ class Fruit{
   }
 
   void display(){
+    translate(location.x, location.y);
+    rotate(rotation);
     stroke(1);
+
+  // 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 persimmon, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
+    color[] colors = new color[] {
+      color(209, 35, 4),
+      color(255, 71, 71),
+      color(120, 48, 252),
+      color(250, 172, 70),
+      color(245, 105, 12),
+      color(227, 16, 16),
+      color(252, 246, 124),
+      color(255, 173, 217),
+      color(255, 245, 102),
+      color(196, 255, 150),
+      color(78, 204, 105)
+    };
+    color c = colors[type];
     fill(c);
+    circle(0, 0, radius*2);
+    
     blinking();
     mouth();
     rotate(-rotation);
     translate(-location.x, -location.y);
-    //circle(location.x, location.y, radius*2);
     //fill(0);
     //circle(location.x + 3 * mass, location.y - .3 * mass, radius/3);
     //circle(location.x - 3 * mass, location.y - .3 * mass, radius/3);

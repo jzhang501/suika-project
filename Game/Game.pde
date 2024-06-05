@@ -124,11 +124,11 @@ void draw() {
             }
           }
         }
-        f.display();
         if (f.location.y < 150){
           losePage = true;
         }
       }
+      f.display();
     }
     displayFruit = new Fruit(mouseX, 160, type);
     displayFruit.bounce();
