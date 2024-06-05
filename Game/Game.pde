@@ -11,6 +11,7 @@ boolean losePage; // failing and results
 boolean regularMode; // normal play with score
 boolean timerMode; // certain time restraints
 boolean smallMode; // box size restaints
+Scoreboard currentBoard;
 PFont f;
 int time = 0;
 
@@ -20,6 +21,7 @@ void setup() {
   fruitList = new ArrayList<Fruit>();
   type = (int) (Math.random() * 5);
   f = createFont("Monospaced",100,true);
+  currentBoard = new Scoreboard();
 }
 
 void draw() {
@@ -119,6 +121,7 @@ void draw() {
           if (f.location.dist(g.location) < f.radius + g.radius) {
             if (f.type==g.type) {
               f.merge(g);
+              currentBoard.addScore(f.type);
             } else {
               f.collide(g);
             }
@@ -130,6 +133,7 @@ void draw() {
       }
       f.display();
     }
+    currentBoard.display();
     displayFruit = new Fruit(mouseX, 160, type);
     displayFruit.bounce();
     displayFruit.display();
