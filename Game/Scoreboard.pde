@@ -12,7 +12,11 @@ class Scoreboard{
   }
   
   void display(){
-    text(score, 20, 40);
+    fill(255,255,224);
+    rect(40, 20, 150, 100, 10, 10, 10, 10);
+    fill(0);
+    text("Score:", 60, 60);
+    text(score, 60, 100);
   }
   
   void addScore(int type) {
