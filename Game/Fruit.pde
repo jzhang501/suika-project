@@ -142,7 +142,7 @@ class Fruit{
       color(78, 204, 105)
     };
     color c = colors[type];
-    fill(c);
+    fill(c, 75);
     circle(0, 0, radius*2);
     
     blinking();

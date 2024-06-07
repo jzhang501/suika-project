@@ -136,7 +136,9 @@ void draw() {
     currentBoard.display();
     displayFruit = new Fruit(mouseX, 160, type);
     displayFruit.bounce();
-    displayFruit.display();
+    if (time >= 25) {
+      displayFruit.display();
+    }
     if (timerMode){
       
     }
