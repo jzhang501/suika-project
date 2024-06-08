@@ -11,21 +11,28 @@ class Fruit{
   float radius;
   int type;
   float rotation; // in radians
+  float ticks;
   
   PShape[] fruitImages = new PShape[] {loadShape("cherry.svg"), loadShape("strawberry.svg"), 
     loadShape("grapes.svg"), loadShape("dekopon.svg"), loadShape("persimmon.svg"), 
     loadShape("apple.svg"), loadShape("pear.svg"), loadShape("peach.svg"), 
     loadShape("pineapple.svg"), loadShape("melon.svg"), loadShape("watermelon.svg")};
 
-  Fruit(float x, float y){  
-      location = new PVector(x, y);
-      velocity = new PVector(0, 0);
-      acceleration = new PVector(0, 0);
-      type = (int) (Math.random()*11);
-      mass = type+1;
-      radius = (float) 10 * mass;
-  }
-
+// 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 persimmon, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
+  color[] colors = new color[] {
+    color(209, 35, 4),
+    color(255, 71, 71),
+    color(120, 48, 252),
+    color(250, 172, 70),
+    color(245, 105, 12),
+    color(227, 16, 16),
+    color(252, 246, 124),
+    color(255, 173, 217),
+    color(255, 245, 102),
+    color(196, 255, 150),
+    color(78, 204, 105)
+  };
+  
   Fruit(float x, float y, int typeI){  
       location = new PVector(x, y);
       velocity = new PVector(0, 0);
@@ -33,14 +40,17 @@ class Fruit{
       type = typeI;
       mass = type+1;
       radius = (float) 10 * mass;
+      ticks = 0;
   }
 
   void move(){
-   location.add(velocity);
-   velocity.add(acceleration);
-   acceleration = new PVector(0, 0);
-   //velocity.limit(10);
-   rotation += velocity.x/radius;
+    if (ticks < 200 || velocity.mag() > 0.25) {
+      location.add(velocity);
+    }
+    ticks++;
+    velocity.add(acceleration);
+    acceleration = new PVector(0, 0);
+    rotation += velocity.x/radius;
   }
 
   void bounce(){
@@ -127,20 +137,6 @@ class Fruit{
     rotate(rotation);
     stroke(1);
 
-  // 0 cherry, 1 strawberry, 2 grape, 3 dekopon, 4 persimmon, 5 apple, 6 pear, 7 peach, 8 pineapple, 9 melon, 10 watermelon
-    color[] colors = new color[] {
-      color(209, 35, 4),
-      color(255, 71, 71),
-      color(120, 48, 252),
-      color(250, 172, 70),
-      color(245, 105, 12),
-      color(227, 16, 16),
-      color(252, 246, 124),
-      color(255, 173, 217),
-      color(255, 245, 102),
-      color(196, 255, 150),
-      color(78, 204, 105)
-    };
     color c = colors[type];
     fill(c, 75);
     circle(0, 0, radius*2);
