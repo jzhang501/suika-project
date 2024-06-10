@@ -7,10 +7,6 @@ class Scoreboard{
     score = 0;
   }
   
-  void calculate(){
-    
-  }
-  
   void display(){
     fill(255,255,224);
     rect(40, 20, 150, 100, 10, 10, 10, 10);

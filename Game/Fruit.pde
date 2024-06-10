@@ -43,7 +43,7 @@ class Fruit{
    rotation += velocity.x/radius;
   }
 
-  void bounce(){
+  void bounce(int bot){
     float x = location.x;
     float y = location.y;
     if (x < radius+160){
@@ -53,9 +53,9 @@ class Fruit{
       velocity.set(velocity.x * -.3, velocity.y * .3);
       location.set(640-radius, y);
     }
-    if (y > 950-radius){
+    if (y > bot-radius){
       velocity.set(velocity.x * .3 , velocity.y * -.3);
-      location.set(x, 950-radius);
+      location.set(x, bot-radius);
     }
   }
   

@@ -4,6 +4,7 @@ ArrayList<Fruit> fruitList;
 Fruit displayFruit; // the one that doesn't fall and shows you what will drop next
 int type;
 boolean displayed;
+boolean ended;
 boolean startPage = true;
 boolean modePage; //selects the modes
 boolean winPage; // winning and congrats
@@ -12,8 +13,10 @@ boolean regularMode; // normal play with score
 boolean timerMode; // certain time restraints
 boolean smallMode; // box size restaints
 Scoreboard currentBoard;
+Stopwatch currentTime;
 PFont f;
 int time = 0;
+int bot = 0;
 
 void setup() {
   size(800,1000);
@@ -22,6 +25,7 @@ void setup() {
   type = (int) (Math.random() * 5);
   f = createFont("Monospaced",100,true);
   currentBoard = new Scoreboard();
+  currentTime = new Stopwatch();
 }
 
 void draw() {
@@ -56,7 +60,7 @@ void draw() {
   if (modePage){
       if (time > 30){
         background(196,164,132);
-        Button regularModeSwitch = new Button(200,-50,loadShape("watermelon.svg"),400,200,150,"Press to Select Regular Mode",30,color(255,255,255));
+        Button regularModeSwitch = new Button(150,75,500,150,200,150,"Press to Select Regular Mode",30,color(0));
         regularModeSwitch.display();
         regularModeSwitch.click();
         if (regularModeSwitch.clicked){
@@ -64,7 +68,7 @@ void draw() {
           regularMode = true;
           time = 0;
          }
-        Button timerModeSwitch = new Button(200,300,loadShape("watermelon.svg"),400,200,500,"Press to Select Timer Mode",30,color(255,255,255));
+        Button timerModeSwitch = new Button(150,425,500,150,200,500,"Press to Select Timer Mode",30,color(0));
         timerModeSwitch.display();
         timerModeSwitch.click();
         if (timerModeSwitch.clicked){
@@ -73,7 +77,7 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button smallModeSwitch = new Button(200,650,loadShape("watermelon.svg"),400,200,850,"Press to Select Small Mode",30,color(255,255,255));
+        Button smallModeSwitch = new Button(150,775,500,150,200,850,"Press to Select Small Mode",30,color(0));
         smallModeSwitch.display();
         smallModeSwitch.click();
         if (smallModeSwitch.clicked){
@@ -86,12 +90,16 @@ void draw() {
       time++;
   }
   if (winPage){
-    textFont(f,100);
-    text("You Kinda Win",100,150);
+    background(196,164,132);
+    textFont(f,50);
+    text("You Kinda Won",200,150);
+    text("You got a score of " + currentBoard.score,100,150);
   }
   if (losePage){
-    textFont(f,100);
-    text("You Kinda Lose",100,150);
+    background(196,164,132);
+    textFont(f,50);
+    text("You Kinda Lost",200,150);
+    text("You got a score of " + currentBoard.score,100,450);
   }
   if (regularMode){
     if (mousePressed && mouseButton == LEFT && time >= 25) {
@@ -102,19 +110,29 @@ void draw() {
     }
     time++;
     frameRate(30);
+    currentTime.addSecond();
     background(196,164,132);
     fill(255,255,224);
     // The x of box is bounded 150 to 650 on outer and 160 to 640 on inner
     // The y on top is 150 and ends at 950 inner or 960 outer at the bottom
-    rect(150,150,10,800);
-    rect(640,150,10,800);
-    rect(150,950,500,10);
+   if (smallMode){
+     rect(150,150,10,500);
+     rect(640,150,10,500);
+     rect(150,650,500,10);
+     bot = 650;
+   }
+   else{
+     rect(150,150,10,800);
+     rect(640,150,10,800);
+     rect(150,950,500,10);
+     bot = 950;
+   }
     for (int i = 0; i < fruitList.size(); i++) {
       Fruit f = fruitList.get(i);
       PVector gravity = new PVector(0, f.mass*.3);
       f.applyForce(gravity);
       f.move();
-      f.bounce();
+      f.bounce(bot);
       for (int j = i; j < fruitList.size(); j++) {
         Fruit g = fruitList.get(j);
         if (!f.equals(g)) {
@@ -128,20 +146,24 @@ void draw() {
           }
         }
         if (f.location.y < 150){
+          regularMode = false;
+          smallMode = false;
+          timerMode = false;
           losePage = true;
         }
       }
       f.display();
     }
     currentBoard.display();
+    currentTime.display();
     displayFruit = new Fruit(mouseX, 160, type);
-    displayFruit.bounce();
+    displayFruit.bounce(bot);
     displayFruit.display();
-    if (timerMode){
-      
-    }
-    if (smallMode){
-      
-    }
+      if (timerMode){
+        
+      }
+      if (ended){
+        
+      }
   }
 }
