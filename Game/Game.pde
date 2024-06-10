@@ -17,8 +17,10 @@ Stopwatch currentTime;
 PFont f;
 int time = 0;
 int bot = 0;
+final int delay = 25; // default 25
 
 void setup() {
+  frameRate(30);
   size(800,1000);
   background(196,164,132);
   fruitList = new ArrayList<Fruit>();
@@ -102,7 +104,7 @@ void draw() {
     text("You got a score of " + currentBoard.score,100,450);
   }
   if (regularMode){
-    if (mousePressed && mouseButton == LEFT && time >= 25) {
+    if (mousePressed && mouseButton == LEFT && time >= delay) {
       fruitList.add(displayFruit);
       type = (int) (Math.random() * 5);
       displayFruit = new Fruit(mouseX, 150, type);
@@ -115,6 +117,7 @@ void draw() {
     fill(255,255,224);
     // The x of box is bounded 150 to 650 on outer and 160 to 640 on inner
     // The y on top is 150 and ends at 950 inner or 960 outer at the bottom
+
    if (smallMode){
      rect(150,150,10,500);
      rect(640,150,10,500);
@@ -127,6 +130,8 @@ void draw() {
      rect(150,950,500,10);
      bot = 950;
    }
+
+    // all fruits
     for (int i = 0; i < fruitList.size(); i++) {
       Fruit f = fruitList.get(i);
       PVector gravity = new PVector(0, f.mass*.3);
@@ -158,7 +163,9 @@ void draw() {
     currentTime.display();
     displayFruit = new Fruit(mouseX, 160, type);
     displayFruit.bounce(bot);
-    displayFruit.display();
+    if (time >= delay) {
+      displayFruit.display();
+    }
       if (timerMode){
         
       }
