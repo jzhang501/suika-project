@@ -22,7 +22,7 @@ final int delay = 25; // default 25
 void setup() {
   frameRate(30);
   size(800,1000);
-  background(196,164,132);
+  background(234, 202, 169);
   fruitList = new ArrayList<Fruit>();
   type = (int) (Math.random() * 5);
   f = createFont("Monospaced",100,true);
@@ -61,7 +61,7 @@ void draw() {
   }
   if (modePage){
       if (time > 30){
-        background(196,164,132);
+        background(234, 202, 169);
         Button regularModeSwitch = new Button(150,75,500,150,200,150,"Press to Select Regular Mode",30,color(0));
         regularModeSwitch.display();
         regularModeSwitch.click();
@@ -92,13 +92,13 @@ void draw() {
       time++;
   }
   if (winPage){
-    background(196,164,132);
+    background(234, 202, 169);
     textFont(f,50);
     text("You Kinda Won",200,150);
     text("You got a score of " + currentBoard.score,100,150);
   }
   if (losePage){
-    background(196,164,132);
+    background(234, 202, 169);
     textFont(f,50);
     text("You Kinda Lost",200,150);
     text("You got a score of " + currentBoard.score,100,450);
@@ -113,7 +113,7 @@ void draw() {
     time++;
     frameRate(30);
     currentTime.addSecond();
-    background(196,164,132);
+    background(234, 202, 169);
     fill(255,255,224);
     // The x of box is bounded 150 to 650 on outer and 160 to 640 on inner
     // The y on top is 150 and ends at 950 inner or 960 outer at the bottom

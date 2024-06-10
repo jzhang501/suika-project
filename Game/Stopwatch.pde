@@ -13,7 +13,7 @@ class Stopwatch{
     rect(610, 20, 150, 100, 10, 10, 10, 10);
     fill(0);
     text("Time:", 630, 60);
-    text(seconds, 630, 100);
+    text(seconds/30, 630, 100);
   }
   
   void addSecond(){
