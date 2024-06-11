@@ -20,5 +20,8 @@ class Stopwatch{
       seconds++;
   }
   
+  void clear() {
+    seconds = 0;
+  }
 }
   

@@ -58,7 +58,7 @@ void draw() {
     }
   }
   if (modePage){
-      if (time > 30){
+      if (time > 15){
         background(234, 202, 169);
         Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30,color(0));
         text("You can play to get as much as you can",130,250);     
@@ -103,8 +103,11 @@ void draw() {
     playAgainSwitch.display();
     playAgainSwitch.click();
     if (playAgainSwitch.clicked){
-      startPage = true;
+      modePage = true;
       endPage = false;
+      fruitList.clear();
+      currentBoard.clear();
+      currentTime.clear();
     }
   }
   if (regularMode){
