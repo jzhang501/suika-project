@@ -4,11 +4,9 @@ ArrayList<Fruit> fruitList;
 Fruit displayFruit; // the one that doesn't fall and shows you what will drop next
 int type;
 boolean displayed;
-boolean ended;
 boolean startPage = true;
 boolean modePage; //selects the modes
-boolean winPage; // winning and congrats
-boolean losePage; // failing and results
+boolean endPage; // winning and congrats
 boolean regularMode; // normal play with score
 boolean timerMode; // certain time restraints
 boolean smallMode; // box size restaints
@@ -62,7 +60,8 @@ void draw() {
   if (modePage){
       if (time > 30){
         background(234, 202, 169);
-        Button regularModeSwitch = new Button(150,75,500,150,200,150,"Press to Select Regular Mode",30,color(0));
+        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30,color(0));
+        text("You can play to get as much as you can",130,250);     
         regularModeSwitch.display();
         regularModeSwitch.click();
         if (regularModeSwitch.clicked){
@@ -70,7 +69,8 @@ void draw() {
           regularMode = true;
           time = 0;
          }
-        Button timerModeSwitch = new Button(150,425,500,150,200,500,"Press to Select Timer Mode",30,color(0));
+        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30,color(0));
+        text("You have 90 seconds to get as much as you can",75,600);
         timerModeSwitch.display();
         timerModeSwitch.click();
         if (timerModeSwitch.clicked){
@@ -79,7 +79,8 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button smallModeSwitch = new Button(150,775,500,150,200,850,"Press to Select Small Mode",30,color(0));
+        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30,color(0));
+        text("You have a smaller space to get as much as you can",45,950);
         smallModeSwitch.display();
         smallModeSwitch.click();
         if (smallModeSwitch.clicked){
@@ -91,17 +92,20 @@ void draw() {
       }
       time++;
   }
-  if (winPage){
+  if (endPage){
     background(234, 202, 169);
+    fill(204, 85, 0);
     textFont(f,50);
-    text("You Kinda Won",200,150);
-    text("You got a score of " + currentBoard.score,100,150);
-  }
-  if (losePage){
-    background(234, 202, 169);
-    textFont(f,50);
-    text("You Kinda Lost",200,150);
-    text("You got a score of " + currentBoard.score,100,450);
+    text("Better luck next time!",70,150);
+    text("You got a score of " + currentBoard.score + "!",80,300);
+    text("Don't lose again!",135,450);
+    Button playAgainSwitch = new Button(200,600,loadShape("watermelon.svg"),400,250,800,"Press to Play Again",30,color(255,255,255));
+    playAgainSwitch.display();
+    playAgainSwitch.click();
+    if (playAgainSwitch.clicked){
+      startPage = true;
+      endPage = false;
+    }
   }
   if (regularMode){
     if (mousePressed && mouseButton == LEFT && time >= delay) {
@@ -130,7 +134,7 @@ void draw() {
      rect(150,950,500,10);
      bot = 950;
    }
-
+   
     // all fruits
     for (int i = 0; i < fruitList.size(); i++) {
       Fruit f = fruitList.get(i);
@@ -154,7 +158,7 @@ void draw() {
           regularMode = false;
           smallMode = false;
           timerMode = false;
-          losePage = true;
+          endPage = true;
         }
       }
       f.display();
@@ -166,11 +170,14 @@ void draw() {
     if (time >= delay) {
       displayFruit.display();
     }
-      if (timerMode){
-        
+    
+    if (timerMode){
+      if (currentTime.seconds/30 > 90){
+          regularMode = false;
+          smallMode = false;
+          timerMode = false;
+          endPage = true;
       }
-      if (ended){
-        
-      }
+    }
   }
 }
