@@ -13,13 +13,16 @@ class Stopwatch {
     fill(0);
     text("Time:", 630, 60);
     
-    int minutes = seconds / 60;
-    int sec = seconds % 60;
+    int minutes = seconds / 900;
+    int sec = seconds / 30;
     String timeString = nf(minutes, 2) + ":" + nf(sec, 2);
     text(timeString, 630, 100);
   }
 
   void addSecond() {
+    if (seconds == 60) {
+      seconds = 0;
+    }
     seconds++;
   }
 

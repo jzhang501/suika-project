@@ -37,6 +37,7 @@ void draw() {
     Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30,color(255,255,255), 50);
     ArrayList<Fruit> startDisplay = new ArrayList<Fruit>();
     if (!displayed){
+      background(234, 202, 169);
       displayed = true;
       for (int i = 0; i < 10; i++){
         if (i < 7){
@@ -96,8 +97,7 @@ void draw() {
         if (exitSwitch.clicked){
           startPage = true;
           modePage = false;
-          smallMode = false;
-          regularMode = false;
+          time = 0;
         }
       }
       time++;
