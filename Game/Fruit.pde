@@ -138,17 +138,15 @@ class Fruit{
     stroke(1);
 
     color c = colors[type];
-    fill(c, 75);
+    fill(red(c), green(c), blue(c), 0);
+    noStroke();
     circle(0, 0, radius*2);
     
+    stroke(1);
     blinking();
     mouth();
     rotate(-rotation);
     translate(-location.x, -location.y);
-    //fill(0);
-    //circle(location.x + 3 * mass, location.y - .3 * mass, radius/3);
-    //circle(location.x - 3 * mass, location.y - .3 * mass, radius/3);
-    
   }
 
 }
