@@ -63,7 +63,7 @@ void draw() {
   if (modePage){
       if (time > 15){
         background(125, 109, 97);
-        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30, color (71, 68, 62), color(125, 109, 97));
+        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30, color(54, 52, 50), color(71, 68, 62));
         regularModeSwitch.hoverEffect();
         fill(color(195, 223, 224));
         text("You can play to get as much as you can",130,250);     
@@ -74,7 +74,7 @@ void draw() {
           regularMode = true;
           time = 0;
          }
-        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30, color (71, 68, 62), color(125, 109, 97));
+        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30, color(54, 52, 50), color(71, 68, 62));
         timerModeSwitch.hoverEffect();
         fill(color(195, 223, 224));
         text("You have 90 seconds to get as much as you can",75,600);
@@ -86,7 +86,7 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30, color (71, 68, 62), color(125, 109, 97));
+        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30, color(54, 52, 50), color(71, 68, 62));
         smallModeSwitch.hoverEffect();
         fill(color(195, 223, 224));
         text("You have a smaller space to get as much as you can",45,950);
@@ -98,7 +98,7 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, color (71, 68, 62), color(125, 109, 97));
+        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, color(54, 52, 50), color(71, 68, 62));
         exitSwitch.hoverEffect();
         exitSwitch.display();
         exitSwitch.click();
