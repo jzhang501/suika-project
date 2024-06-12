@@ -185,7 +185,7 @@ void draw() {
     }
     
     if (timerMode){
-      if (currentTime.seconds/30 > 90){
+      if (currentTime.ticks/30 > 90){
           regularMode = false;
           smallMode = false;
           timerMode = false;

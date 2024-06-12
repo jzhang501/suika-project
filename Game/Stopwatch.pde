@@ -1,10 +1,10 @@
 import java.lang.Math;
 
 class Stopwatch {
-  int seconds;
+  int ticks;
 
   Stopwatch() {
-    seconds = 0;
+    ticks = 0;
   }
 
   void display() {
@@ -13,20 +13,17 @@ class Stopwatch {
     fill(0);
     text("Time:", 630, 60);
     
-    int minutes = seconds / 900;
-    int sec = seconds / 30;
+    int minutes = ticks / 900;
+    int sec = (ticks / 30) % 60;
     String timeString = nf(minutes, 2) + ":" + nf(sec, 2);
     text(timeString, 630, 100);
   }
 
   void addSecond() {
-    if (seconds == 60) {
-      seconds = 0;
-    }
-    seconds++;
+    ticks++;
   }
 
   void clear() {
-    seconds = 0;
+    ticks = 0;
   }
 }
