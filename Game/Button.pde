@@ -32,7 +32,6 @@ class Button {
   Button(int xl, int yl, int l, int w, int xt, int yt, String text, int textSize, color c, color hoverColor) {
     this.shapeLocation = new PVector(xl, yl);
     shape = createShape(RECT, xl, yl, l, w);
-    shape.setFill(color(255,226,130));
     this.l = l;
     this.w = w;
     this.size = l; // Corrected
@@ -77,6 +76,10 @@ class Button {
       fill(hoverColor);
     } else {
       fill(defaultColor);
+    }
+    shape.setFill(color(158, 173, 111));
+    if (hover) {
+      shape.setFill(color(188, 217, 121));
     }
     
     if (fill) {

@@ -21,7 +21,7 @@ final int delay = 25; // default 25
 void setup() {
   frameRate(30);
   size(800,1000);
-  background(234, 202, 169);
+  background(125, 109, 97);
   fruitList = new ArrayList<Fruit>();
   type = (int) (Math.random() * 5);
   f = createFont("Monospaced",100,true);
@@ -31,14 +31,14 @@ void setup() {
 
 void draw() {
   if (startPage){
-    fill(204, 85, 0);
+    fill(188, 217, 121);
     textFont(f,100);
     text("Suika Game!!!",20,150);
-    Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30, 255, color(150,255,150));
+    Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30, 255, color(125, 109, 97));
     modeSwitch.hoverEffect();
     ArrayList<Fruit> startDisplay = new ArrayList<Fruit>();
     if (!displayed){
-      background(234, 202, 169);
+      background(125, 109, 97);
       displayed = true;
       for (int i = 0; i < 10; i++){
         if (i < 7){
@@ -62,9 +62,10 @@ void draw() {
   }
   if (modePage){
       if (time > 15){
-        background(234, 202, 169);
-        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30, 0, color(150,255,150));
+        background(125, 109, 97);
+        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30, color (71, 68, 62), color(125, 109, 97));
         regularModeSwitch.hoverEffect();
+        fill(color(195, 223, 224));
         text("You can play to get as much as you can",130,250);     
         regularModeSwitch.display();
         regularModeSwitch.click();
@@ -73,8 +74,9 @@ void draw() {
           regularMode = true;
           time = 0;
          }
-        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30, 0, color(150,255,150));
+        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30, color (71, 68, 62), color(125, 109, 97));
         timerModeSwitch.hoverEffect();
+        fill(color(195, 223, 224));
         text("You have 90 seconds to get as much as you can",75,600);
         timerModeSwitch.display();
         timerModeSwitch.click();
@@ -84,8 +86,9 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30, 0, color(150,255,150));
+        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30, color (71, 68, 62), color(125, 109, 97));
         smallModeSwitch.hoverEffect();
+        fill(color(195, 223, 224));
         text("You have a smaller space to get as much as you can",45,950);
         smallModeSwitch.display();
         smallModeSwitch.click();
@@ -95,7 +98,7 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, 0, color(150,255,150));
+        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, color (71, 68, 62), color(125, 109, 97));
         exitSwitch.hoverEffect();
         exitSwitch.display();
         exitSwitch.click();
@@ -108,13 +111,14 @@ void draw() {
       time++;
   }
   if (endPage){
-    background(234, 202, 169);
+    background(125, 109, 97);
     fill(204, 85, 0);
     textFont(f,50);
+    fill(color(195, 223, 224));
     text("Better luck next time!",70,150);
     text("You got a score of " + currentBoard.score + "!",80,300);
     text("Don't lose again!",135,450);
-    Button playAgainSwitch = new Button(200,600,loadShape("watermelon.svg"),400,250,800,"Press to Play Again",30, 255, color(150,255,150));
+    Button playAgainSwitch = new Button(200,600,loadShape("watermelon.svg"),400,250,800,"Press to Play Again",30, 255, color(125, 109, 97));
     playAgainSwitch.hoverEffect();
     playAgainSwitch.display();
     playAgainSwitch.click();
@@ -136,7 +140,7 @@ void draw() {
     time++;
     frameRate(30);
     currentTime.addSecond();
-    background(234, 202, 169);
+    background(125, 109, 97);
     fill(255,255,224);
     // The x of box is bounded 150 to 650 on outer and 160 to 640 on inner
     // The y on top is 150 and ends at 950 inner or 960 outer at the bottom
