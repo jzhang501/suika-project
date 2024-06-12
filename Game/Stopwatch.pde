@@ -13,8 +13,8 @@ class Stopwatch {
     fill(0);
     text("Time:", 630, 60);
     
-    int minutes = ticks / 900;
-    int sec = (ticks / 30) % 60;
+    int minutes = ticks / 2700;
+    int sec = (ticks / 45) % 60;
     String timeString = nf(minutes, 2) + ":" + nf(sec, 2);
     text(timeString, 630, 100);
   }

@@ -3,7 +3,7 @@ import java.lang.Math;
 class Fruit{
   int timeBetweenBlink = 1000;
   int blinkTime = 0;
-  boolean eyesOpen = true;
+  boolean eyesOpen = false;
   PVector location;
   PVector velocity;
   PVector acceleration;

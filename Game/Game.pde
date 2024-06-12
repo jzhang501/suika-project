@@ -19,7 +19,7 @@ int bot = 0;
 final int delay = 25; // default 25
 
 void setup() {
-  frameRate(30);
+  frameRate(45);
   size(800,1000);
   background(125, 109, 97);
   fruitList = new ArrayList<Fruit>();
@@ -98,7 +98,7 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, color (71, 68, 62), color(125, 109, 97));
+        Button exitSwitch = new Button(350,10,75,55,360,50,"Exit",30, color (71, 68, 62), color(125, 109, 97));
         exitSwitch.hoverEffect();
         exitSwitch.display();
         exitSwitch.click();
@@ -138,7 +138,7 @@ void draw() {
       time = 0;
     }
     time++;
-    frameRate(30);
+    frameRate(45);
     currentTime.addSecond();
     background(125, 109, 97);
     fill(255,255,224);
@@ -195,7 +195,7 @@ void draw() {
     }
     
     if (timerMode){
-      if (currentTime.ticks/30 > 90){
+      if (currentTime.ticks/45 > 90){
           regularMode = false;
           smallMode = false;
           timerMode = false;
