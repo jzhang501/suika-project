@@ -48,18 +48,28 @@ class Button {
   
   void click() {
     if (mousePressed == true && mouseButton == LEFT) {
-      if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + l + size && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + w + size) {
-        clicked = true;
+      if (fill) {
+        if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + l && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + w) {
+          clicked = true;
+        }
+      } else {
+        if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + size && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + size) {
+          clicked = true;
+        }
       }
     }
   }
   
   void hoverEffect() {
-    if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + l + size && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + w + size) {
-      hover = true;
-    } else {
-      hover = false;
-    }
+    if (fill) {
+        if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + l && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + w) {
+          hover = true;
+        }
+      } else {
+        if (mouseX >= shapeLocation.x && mouseX <= shapeLocation.x + size && mouseY >= shapeLocation.y && mouseY <= shapeLocation.y + size) {
+          hover = true;
+        }
+      }
   }
   
   void display() {
@@ -76,5 +86,6 @@ class Button {
     }
     textFont(f, textSize);
     text(text, textLocation.x, textLocation.y);
+    fill(defaultColor);
   }
 }

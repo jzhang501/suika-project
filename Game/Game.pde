@@ -34,7 +34,8 @@ void draw() {
     fill(204, 85, 0);
     textFont(f,100);
     text("Suika Game!!!",20,150);
-    Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30,color(255,255,255), 50);
+    Button modeSwitch = new Button(200,600,loadShape("watermelon.svg"),400,240,800,"Press to Select Mode",30, 255, color(150,255,150));
+    modeSwitch.hoverEffect();
     ArrayList<Fruit> startDisplay = new ArrayList<Fruit>();
     if (!displayed){
       background(234, 202, 169);
@@ -62,7 +63,8 @@ void draw() {
   if (modePage){
       if (time > 15){
         background(234, 202, 169);
-        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30,color(0), 50);
+        Button regularModeSwitch = new Button(150,75,500,150,200,160,"Press to Select Regular Mode",30, 0, color(150,255,150));
+        regularModeSwitch.hoverEffect();
         text("You can play to get as much as you can",130,250);     
         regularModeSwitch.display();
         regularModeSwitch.click();
@@ -71,7 +73,8 @@ void draw() {
           regularMode = true;
           time = 0;
          }
-        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30,color(0), 50);
+        Button timerModeSwitch = new Button(150,425,500,150,210,510,"Press to Select Timer Mode",30, 0, color(150,255,150));
+        timerModeSwitch.hoverEffect();
         text("You have 90 seconds to get as much as you can",75,600);
         timerModeSwitch.display();
         timerModeSwitch.click();
@@ -81,7 +84,8 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30,color(0), 50);
+        Button smallModeSwitch = new Button(150,775,500,150,220,860,"Press to Select Small Mode",30, 0, color(150,255,150));
+        smallModeSwitch.hoverEffect();
         text("You have a smaller space to get as much as you can",45,950);
         smallModeSwitch.display();
         smallModeSwitch.click();
@@ -91,7 +95,8 @@ void draw() {
           regularMode = true;
           time = 0;
         }
-        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30,color(0), 50);
+        Button exitSwitch = new Button(50, 50,75,50,55,80,"Exit",30, 0, color(150,255,150));
+        exitSwitch.hoverEffect();
         exitSwitch.display();
         exitSwitch.click();
         if (exitSwitch.clicked){
@@ -109,7 +114,8 @@ void draw() {
     text("Better luck next time!",70,150);
     text("You got a score of " + currentBoard.score + "!",80,300);
     text("Don't lose again!",135,450);
-    Button playAgainSwitch = new Button(200,600,loadShape("watermelon.svg"),400,250,800,"Press to Play Again",30,color(255,255,255), 50);
+    Button playAgainSwitch = new Button(200,600,loadShape("watermelon.svg"),400,250,800,"Press to Play Again",30, 255, color(150,255,150));
+    playAgainSwitch.hoverEffect();
     playAgainSwitch.display();
     playAgainSwitch.click();
     if (playAgainSwitch.clicked){
